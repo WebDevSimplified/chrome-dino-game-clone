@@ -24,6 +24,19 @@ import {
     document.addEventListener("keydown", onJump)
   }
   
+  export function bossWin(currentFrameTime,dinoFrame,DINO_FRAME_COUNT){
+    console.log((currentFrameTime),(dinoFrame),(DINO_FRAME_COUNT));
+   //move the boss to the dino
+    bossElem.style.left = '34%';
+    
+    //move the bosselem smoothly
+    bossElem.style.transition = 'all 1s';
+    //increase the speed of transiton
+    bossElem.style.transitionTimingFunction = 'linear';
+    //decrrease the transition duration
+    bossElem.style.transitionDuration = '0.5s';
+
+}
 //   export function updateDino(delta, speedScale) {
 //     handleRun(delta, speedScale)
 //     handleJump(delta)
@@ -37,19 +50,19 @@ import {
 //     dinoElem.src = "imgs/dino-lose.png"
 //   }
   
-//   function handleRun(delta, speedScale) {
-//     if (isJumping) {
-//       dinoElem.src = `imgs/dino-stationary.png`
-//       return
-//     }
+  function handleRun(delta, speedScale) {
+    // if (isJumping) {
+    //   dinoElem.src = `imgs/dino-stationary.png`
+    //   return
+    // }
   
-//     if (currentFrameTime >= FRAME_TIME) {
-//       dinoFrame = (dinoFrame + 1) % DINO_FRAME_COUNT
-//       dinoElem.src = `imgs/dino-run-${dinoFrame}.png`
-//       currentFrameTime -= FRAME_TIME
-//     }
-//     currentFrameTime += delta * speedScale
-//   }
+    if (currentFrameTime >= FRAME_TIME) {
+      dinoFrame = (dinoFrame + 1) % DINO_FRAME_COUNT
+      dinoElem.src = `imgs/dino-run-${dinoFrame}.png`
+      currentFrameTime -= FRAME_TIME
+    }
+    currentFrameTime += delta * speedScale
+  }
   
 //   function handleJump(delta) {
 //     if (!isJumping) return

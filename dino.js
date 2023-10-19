@@ -3,7 +3,7 @@ import {
   setCustomProperty,
   getCustomProperty,
 } from "./updateCustomProperty.js"
-
+import { bossWin } from "./boss.js"
 const dinoElem = document.querySelector("[data-dino]")
 const JUMP_SPEED = 0.45
 const GRAVITY = 0.0015
@@ -35,6 +35,7 @@ export function getDinoRect() {
 
 export function setDinoLose() {
   dinoElem.src = "imgs/dino-lose.png"
+  bossWin(currentFrameTime,dinoFrame,DINO_FRAME_COUNT)
 }
 
 function handleRun(delta, speedScale) {

@@ -46,9 +46,17 @@ body {
 .dino {
   --bottom: 0;
   position: absolute;
-  left: 1%;
+  left: 40%;
   height: 30%;
   bottom: calc(var(--bottom) * 1%);
+}
+.boss{
+  --bottom: 0;
+  position: absolute;
+  left: 5%;
+  height: 30%;
+  z-index: 10;
+  bottom: calc(var(--bottom) * 4%);
 }
 
 .cactus {

@@ -19,6 +19,7 @@ import {
     bossFrame = 0
     currentFrameTime = 0
     yVelocity = 0
+    bossElem.style.left = '5%';
     setCustomProperty(bossElem, "--bottom", 0)
     document.removeEventListener("keydown", onJump)
     document.addEventListener("keydown", onJump)
@@ -28,7 +29,7 @@ import {
     console.log((currentFrameTime),(dinoFrame),(DINO_FRAME_COUNT));
    //move the boss to the dino
     bossElem.style.left = '34%';
-    
+
     //move the bosselem smoothly
     bossElem.style.transition = 'all 1s';
     //increase the speed of transiton
@@ -50,19 +51,19 @@ import {
 //     dinoElem.src = "imgs/dino-lose.png"
 //   }
   
-  function handleRun(delta, speedScale) {
-    // if (isJumping) {
-    //   dinoElem.src = `imgs/dino-stationary.png`
-    //   return
-    // }
+//   function handleRun(delta, speedScale) {
+//     // if (isJumping) {
+//     //   dinoElem.src = `imgs/dino-stationary.png`
+//     //   return
+//     // }
   
-    if (currentFrameTime >= FRAME_TIME) {
-      dinoFrame = (dinoFrame + 1) % DINO_FRAME_COUNT
-      dinoElem.src = `imgs/dino-run-${dinoFrame}.png`
-      currentFrameTime -= FRAME_TIME
-    }
-    currentFrameTime += delta * speedScale
-  }
+//     if (currentFrameTime >= FRAME_TIME) {
+//       dinoFrame = (dinoFrame + 1) % DINO_FRAME_COUNT
+//       dinoElem.src = `imgs/dino-run-${dinoFrame}.png`
+//       currentFrameTime -= FRAME_TIME
+//     }
+//     currentFrameTime += delta * speedScale
+//   }
   
 //   function handleJump(delta) {
 //     if (!isJumping) return

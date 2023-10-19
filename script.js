@@ -1,7 +1,7 @@
 import { updateGround, setupGround } from "./ground.js"
 import { updateDino, setupDino, getDinoRect, setDinoLose } from "./dino.js"
 import { updateCactus, setupCactus, getCactusRects } from "./cactus.js"
-import { bossWin } from "./boss.js"
+import { bossWin, setupBoss } from "./boss.js"
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
 const SPEED_SCALE_INCREASE = 0.00001
@@ -9,7 +9,7 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElem = document.querySelector("[data-world]")
 const scoreElem = document.querySelector("[data-score]")
 const startScreenElem = document.querySelector("[data-start-screen]")
-
+const bossElem = document.querySelector("[data-boss]")
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
 document.addEventListener("keydown", handleStart, { once: true })
@@ -63,9 +63,11 @@ function handleStart() {
   lastTime = null
   speedScale = 1
   score = 0
+  bossElem.style.left = '5%';
   setupGround()
   setupDino()
   setupCactus()
+  //setupBoss()
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }

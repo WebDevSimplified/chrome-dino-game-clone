@@ -7,47 +7,55 @@ import {
 const SPEED = 0.05
 const CACTUS_INTERVAL_MIN = 500
 const CACTUS_INTERVAL_MAX = 2000
-const worldElem = document.querySelector("[data-world]")
 
-let nextCactusTime
-export function setupCactus() {
-  nextCactusTime = CACTUS_INTERVAL_MIN
-  document.querySelectorAll("[data-cactus]").forEach(cactus => {
-    cactus.remove()
-  })
-}
-
-export function updateCactus(delta, speedScale) {
-  document.querySelectorAll("[data-cactus]").forEach(cactus => {
-    incrementCustomProperty(cactus, "--left", delta * speedScale * SPEED * -1)
-    if (getCustomProperty(cactus, "--left") <= -100) {
-      cactus.remove()
-    }
-  })
-
-  if (nextCactusTime <= 0) {
-    createCactus()
-    nextCactusTime =
-      randomNumberBetween(CACTUS_INTERVAL_MIN, CACTUS_INTERVAL_MAX) / speedScale
+export class Cactus {
+  selector
+  nextTime
+  worldElem
+  constructor(selector, worldElem) {
+    this.worldElem = worldElem
+    this.selector = selector
   }
-  nextCactusTime -= delta
-}
 
-export function getCactusRects() {
-  return [...document.querySelectorAll("[data-cactus]")].map(cactus => {
-    return cactus.getBoundingClientRect()
-  })
-}
+  setup() {
+    this.nextTime = CACTUS_INTERVAL_MIN
+    document.querySelectorAll(this.selector).forEach(cactus => {
+      cactus.remove()
+    })
+  }
 
-function createCactus() {
-  const cactus = document.createElement("img")
-  cactus.dataset.cactus = true
-  cactus.src = "imgs/cactus.png"
-  cactus.classList.add("cactus")
-  setCustomProperty(cactus, "--left", 100)
-  worldElem.append(cactus)
-}
+  update(delta, speedScale) {
+    document.querySelectorAll(this.selector).forEach(cactus => {
+      incrementCustomProperty(cactus, "--left", delta * speedScale * SPEED * -1)
+      if (getCustomProperty(cactus, "--left") <= -100) {
+        cactus.remove()
+      }
+    })
 
-function randomNumberBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+    if (this.nextTime <= 0) {
+      this.create()
+      this.nextTime =
+        this.randomNumberBetween(CACTUS_INTERVAL_MIN, CACTUS_INTERVAL_MAX) / speedScale
+    }
+    this.nextTime -= delta
+  }
+
+  getRects() {
+    return [...document.querySelectorAll("[data-cactus]")].map(cactus => {
+      return cactus.getBoundingClientRect()
+    })
+  }
+
+  create() {
+    const cactus = document.createElement("img")
+    cactus.dataset.cactus = true
+    cactus.src = "imgs/cactus.png"
+    cactus.classList.add("cactus") 
+    setCustomProperty(cactus, "--left", 100)
+    this.worldElem.append(cactus)
+  }
+
+  randomNumberBetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+} 
